@@ -15,9 +15,13 @@ There is only one difference. It's support for replacing values with placeholder
 `/main.go`
 ```go
 package main
-import "github.com/cryomator/pgtemplate"
+import (
+    "github.com/cryomator/pgtemplate"
+    "embed"
+    "fmt"
+)
 
-//go:embed sql.gtpl
+//go:embed sql.tpl
 var sqltpl embed.FS
 var tpl = pgtemplate.Must(pgtemplate.ParseFS(sqltpl, "*"))
 func main() {
