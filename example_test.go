@@ -2,12 +2,12 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package pgtemplate_test
+package pgtmpl_test
 
 import (
 	"log"
 
-	"github.com/cryomator/pgtemplate"
+	"github.com/typomaker/pgtmpl"
 )
 
 func ExampleTemplate() {
@@ -20,10 +20,10 @@ func ExampleTemplate() {
 
 	var (
 		authorIDs = []int{100, 12, 334}
-		query     = pgtemplate.Query{}
+		query     = pgtmpl.Query{}
 	)
 
-	t := pgtemplate.Must(pgtemplate.New("author_by_id").Parse(tpl))
+	t := pgtmpl.Must(pgtmpl.New("author_by_id").Parse(tpl))
 
 	err := t.Execute(&query, authorIDs)
 	if err != nil {

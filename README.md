@@ -1,4 +1,4 @@
-# pgtemplate - golang template engine for building postgresql queries
+# pgtmpl - golang template engine for building postgresql queries
 
 ## What is the difference from text/template?
 
@@ -16,16 +16,16 @@ There is only one difference. It's support for replacing values with placeholder
 ```go
 package main
 import (
-    "github.com/cryomator/pgtemplate"
+    "github.com/typomaker/pgtmpl"
     "embed"
     "fmt"
 )
 
 //go:embed sql.tpl
 var sqltpl embed.FS
-var tpl = pgtemplate.Must(pgtemplate.ParseFS(sqltpl, "*"))
+var tpl = pgtmpl.Must(pgtmpl.ParseFS(sqltpl, "*"))
 func main() {
-    var query pgtemplate.Query{}
+    var query pgtmpl.Query{}
     var userID = 777
     if err := tpl.ExecuteTemplate(&query, "select_author", userID); err != nil {
         panic(err)

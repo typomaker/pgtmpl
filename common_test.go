@@ -1,4 +1,4 @@
-package pgtemplate_test
+package pgtmpl_test
 
 import (
 	"fmt"
@@ -7,10 +7,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/cryomator/pgtemplate"
+	"github.com/typomaker/pgtmpl"
 )
 
-func printQuery(q pgtemplate.Query) {
+func printQuery(q pgtmpl.Query) {
 	fmt.Print("TEXT: ")
 	fmt.Println(q.String())
 	fmt.Print("ARGUMENT: ")

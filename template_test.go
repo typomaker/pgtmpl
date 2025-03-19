@@ -1,29 +1,29 @@
-package pgtemplate_test
+package pgtmpl_test
 
 import (
 	"testing"
 
-	"github.com/cryomator/pgtemplate"
 	"github.com/stretchr/testify/assert"
+	"github.com/typomaker/pgtmpl"
 )
 
 func TestTemplate_new(t *testing.T) {
-	q := pgtemplate.Query{}
-	tpl := pgtemplate.Must(pgtemplate.New("T1").Parse(`T1 {{template "T2"}}`))
-	pgtemplate.Must(tpl.New("T2").Parse("T2"))
+	q := pgtmpl.Query{}
+	tpl := pgtmpl.Must(pgtmpl.New("T1").Parse(`T1 {{template "T2"}}`))
+	pgtmpl.Must(tpl.New("T2").Parse("T2"))
 	err := tpl.Execute(&q, nil)
 	assert.NoError(t, err)
 	assert.Equal(t, "T1 T2", q.String())
 }
 func TestTemplate_name(t *testing.T) {
-	tpl := pgtemplate.New("T2")
+	tpl := pgtmpl.New("T2")
 	assert.Equal(t, "T2", tpl.Name())
 }
 func TestTemplate_concatQuery(t *testing.T) {
-	q := pgtemplate.Query{}
-	tpl := pgtemplate.New("")
-	pgtemplate.Must(tpl.New("Q1").Parse("SELECT 1, {{hold .}}"))
-	pgtemplate.Must(tpl.New("Q2").Parse("SELECT 2, {{hold .}}"))
+	q := pgtmpl.Query{}
+	tpl := pgtmpl.New("")
+	pgtmpl.Must(tpl.New("Q1").Parse("SELECT 1, {{hold .}}"))
+	pgtmpl.Must(tpl.New("Q2").Parse("SELECT 2, {{hold .}}"))
 
 	err := tpl.ExecuteTemplate(&q, "Q1", 1)
 	assert.NoError(t, err)
@@ -35,10 +35,10 @@ func TestTemplate_concatQuery(t *testing.T) {
 	assert.Equal(t, q.Args(), []interface{}{1, 2})
 }
 func TestTemplate_resetQuery(t *testing.T) {
-	q := pgtemplate.Query{}
-	tpl := pgtemplate.New("")
-	pgtemplate.Must(tpl.New("Q1").Parse("SELECT 1, {{hold .}}"))
-	pgtemplate.Must(tpl.New("Q2").Parse("SELECT 2, {{hold .}}"))
+	q := pgtmpl.Query{}
+	tpl := pgtmpl.New("")
+	pgtmpl.Must(tpl.New("Q1").Parse("SELECT 1, {{hold .}}"))
+	pgtmpl.Must(tpl.New("Q2").Parse("SELECT 2, {{hold .}}"))
 
 	err := tpl.ExecuteTemplate(&q, "Q1", 1)
 	assert.NoError(t, err)

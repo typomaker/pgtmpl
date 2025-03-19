@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package pgtemplate_test
+package pgtmpl_test
 
 import (
 	"log"
@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/cryomator/pgtemplate"
+	"github.com/typomaker/pgtmpl"
 )
 
 func ExampleTemplate_files() {
@@ -29,8 +29,8 @@ func ExampleTemplate_files() {
 
 	pattern := filepath.Join(dir, "allinone")
 
-	tmpl := pgtemplate.Must(pgtemplate.ParseFiles(pattern))
-	query := pgtemplate.Query{}
+	tmpl := pgtmpl.Must(pgtmpl.ParseFiles(pattern))
+	query := pgtmpl.Query{}
 	data := map[string]interface{}{
 		"ID":      "553d6085-0b28-4f2c-a018-d0f34b03b9e7",
 		"Created": time.Time{},
@@ -59,8 +59,8 @@ func ExampleTemplate_glob() {
 	defer os.RemoveAll(dir)
 
 	pattern := filepath.Join(dir, "*")
-	tpl := pgtemplate.Must(pgtemplate.ParseGlob(pattern))
-	query := pgtemplate.Query{}
+	tpl := pgtmpl.Must(pgtmpl.ParseGlob(pattern))
+	query := pgtmpl.Query{}
 	data := map[string]interface{}{
 		"ID":      "553d6085-0b28-4f2c-a018-d0f34b03b9e7",
 		"Created": time.Time{},
@@ -85,8 +85,8 @@ func ExampleTemplate_fs() {
 	})
 	defer os.RemoveAll(dir)
 
-	tpl := pgtemplate.Must(pgtemplate.ParseFS(os.DirFS(dir), "*"))
-	query := pgtemplate.Query{}
+	tpl := pgtmpl.Must(pgtmpl.ParseFS(os.DirFS(dir), "*"))
+	query := pgtmpl.Query{}
 	data := map[string]interface{}{
 		"ID":      "553d6085-0b28-4f2c-a018-d0f34b03b9e7",
 		"Created": time.Time{},

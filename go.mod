@@ -1,4 +1,4 @@
-module github.com/cryomator/pgtemplate
+module github.com/typomaker/pgtmpl
 
 go 1.17
 

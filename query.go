@@ -1,4 +1,4 @@
-package pgtemplate
+package pgtmpl
 
 import "strings"
 

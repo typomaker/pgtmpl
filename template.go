@@ -1,4 +1,4 @@
-package pgtemplate
+package pgtmpl
 
 import (
 	"fmt"
@@ -43,7 +43,7 @@ func (tpl *Template) ParseFiles(filenames ...string) (*Template, error) {
 }
 func ParseFiles(filenames ...string) (t *Template, err error) {
 	if len(filenames) == 0 {
-		return nil, fmt.Errorf("pgtemplate: no files named in call to ParseFiles")
+		return nil, fmt.Errorf("pgtmpl: no files named in call to ParseFiles")
 	}
 	rootname := filepath.Base(filenames[0])
 	t = New(rootname)
@@ -62,7 +62,7 @@ func ParseGlob(pattern string) (t *Template, err error) {
 			return nil, err
 		}
 		if len(filenames) == 0 {
-			return nil, fmt.Errorf("pgtemplate: pattern matches no files: %#q", pattern)
+			return nil, fmt.Errorf("pgtmpl: pattern matches no files: %#q", pattern)
 		}
 		rootname = filepath.Base(filenames[0])
 	}
@@ -76,7 +76,7 @@ func (tpl *Template) ParseFS(fsys fs.FS, patterns ...string) (*Template, error) 
 }
 func ParseFS(fsys fs.FS, patterns ...string) (t *Template, err error) {
 	if len(patterns) == 0 {
-		return nil, fmt.Errorf("pgtemplate: no patterns in call to ParseFS")
+		return nil, fmt.Errorf("pgtmpl: no patterns in call to ParseFS")
 	}
 	var rootname string
 	{
@@ -85,7 +85,7 @@ func ParseFS(fsys fs.FS, patterns ...string) (t *Template, err error) {
 			return nil, err
 		}
 		if len(filenames) == 0 {
-			return nil, fmt.Errorf("pgtemplate: pattern matches no files: %#q", patterns[0])
+			return nil, fmt.Errorf("pgtmpl: pattern matches no files: %#q", patterns[0])
 		}
 		rootname = filepath.Base(filenames[0])
 	}
@@ -137,6 +137,6 @@ func (tpl *Template) ExecuteTemplate(q *Query, name string, data interface{}) er
 	if t := tpl.Lookup(name); t != nil {
 		return t.Execute(q, data)
 	} else {
-		return fmt.Errorf("pgtemplate: no template %q associated with template %q", name, tpl.Name())
+		return fmt.Errorf("pgtmpl: no template %q associated with template %q", name, tpl.Name())
 	}
 }
