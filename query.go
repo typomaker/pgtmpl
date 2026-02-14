@@ -45,6 +45,7 @@ func (q *Query) Reset() {
 	q.Builder.Reset()
 	q.name = ""
 	if q.args != nil {
+		clear(q.args)
 		q.args = q.args[:0]
 	}
 }
